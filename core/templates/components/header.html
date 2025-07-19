@@ -1,0 +1,25 @@
+{% load static %}
+
+<style>
+    .header img {
+        width: 100px;
+        height: 100px;
+        transition: transform 0.2s;
+    }
+    .header img:hover{
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="container header">
+    <div class="row">
+        <div class="col-6">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'data/logo/logo_black.svg' %}" alt="logo">
+            </a>
+        </div>
+        <div class="col-6 text-end align-content-center">
+            <a href="" class="btn btn-main">Войти</a>
+        </div>
+    </div>
+</div>

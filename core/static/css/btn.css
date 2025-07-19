@@ -1,0 +1,15 @@
+.btn-main {
+    background-color: #47A76A;
+    color: white;
+    padding: 1.5% 4%;
+    font-weight: 500;
+    box-shadow: 0px 0px 75px #47A76A;
+    transition: all 0.3s;
+}
+
+.btn-main:hover {
+    color: white;
+    box-shadow: 0px 0px 75px #98FB98;
+    background-color: #98FB98;
+    transform: scale(1.05);
+}

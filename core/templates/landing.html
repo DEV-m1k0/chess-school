@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Landing
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="animated_logo ">
+        <img src="{% static 'data/logo/animated_logo.svg' %}" alt="">
+    </div>
+    
+    {% include 'components/header.html' %}
+{% endblock %}
