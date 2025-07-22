@@ -18,8 +18,15 @@
                 <img src="{% static 'data/logo/logo_black.svg' %}" alt="logo">
             </a>
         </div>
+        {% if user.is_authenticated %}
+<div class="logout-container">
+    <p>Вы вошли как <strong>{{ user.email }}</strong></p>
+    <a href="{% url 'auth_page' %}?logout" class="btn btn-main">Выйти</a>
+</div>
+{% else %}
         <div class="col-6 text-end align-content-center">
-            <a href="" class="btn btn-main">Войти</a>
+            <a href="{% url 'auth_page' %}" class="btn btn-main">Войти</a>
         </div>
+        {% endif %}
     </div>
 </div>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Вход и регистрация</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+        .form-section {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .messages {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .error { 
+            color: #d32f2f;
+            padding: 10px;
+            background-color: #ffcdd2;
+            border-radius: 4px;
+        }
+        .success { 
+            color: #388e3c;
+            padding: 10px;
+            background-color: #c8e6c9;
+            border-radius: 4px;
+        }
+        .form-title {
+            margin-top: 0;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .verification-section {
+            background-color: #e8f5e9;
+        }
+.logout-container {
+    background-color: #e3f2fd;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.form-footer {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.form-footer a {
+    color: #1976d2;
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    
+    <div class="container">
+        <!-- Форма входа -->
+        <div class="form-section" {% if show_verification %}style="display:none"{% endif %}>
+            <h2 class="form-title">Вход</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ login_form.username.label_tag }}
+                    {{ login_form.username }}
+                    {{ login_form.username.errors }}
+                </div>
+                <div class="form-group">
+                    {{ login_form.password.label_tag }}
+                    {{ login_form.password }}
+                    {{ login_form.password.errors }}
+                </div>
+                <button type="submit" name="login_submit">Войти</button>
+                <div class="form-footer">
+                    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Форма регистрации -->
+        <div class="form-section" {% if show_verification %}style="display:none"{% endif %}>
+            <h2 class="form-title">Регистрация</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ reg_form.last_name.label_tag }}
+                    {{ reg_form.last_name }}
+                    {{ reg_form.last_name.errors }}
+                </div>
+                <div class="form-group">
+                    {{ reg_form.first_name.label_tag }}
+                    {{ reg_form.first_name }}
+                    {{ reg_form.first_name.errors }}
+                </div>
+                <div class="form-group">
+                    {{ reg_form.patronymic.label_tag }}
+                    {{ reg_form.patronymic }}
+                    {{ reg_form.patronymic.errors }}
+                </div>
+                <div class="form-group">
+                    {{ reg_form.email.label_tag }}
+                    {{ reg_form.email }}
+                    {{ reg_form.email.errors }}
+                </div>
+                <div class="form-group">
+                    {{ reg_form.password1.label_tag }}
+                    {{ reg_form.password1 }}
+                    {{ reg_form.password1.errors }}
+                </div>
+                <div class="form-group">
+                    {{ reg_form.password2.label_tag }}
+                    {{ reg_form.password2 }}
+                    {{ reg_form.password2.errors }}
+                </div>
+                <button type="submit" name="register_submit">Зарегистрироваться</button>
+            </form>
+        </div>
+
+        <!-- Форма подтверждения -->
+        {% if show_verification %}
+        <div class="form-section verification-section">
+            <h2 class="form-title">Подтверждение Email</h2>
+            <p>Код отправлен на <strong>{{ request.session.verify_email }}</strong></p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ verify_form.code.label_tag }}
+                    {{ verify_form.code }}
+                    {{ verify_form.code.errors }}
+                </div>
+                <button type="submit" name="verify_submit">Подтвердить</button>
+                <button type="button" onclick="location.href='{% url 'auth_page' %}'" 
+                        style="background-color: #f44336; margin-top: 10px;">
+                    Отмена
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
