@@ -20,56 +20,6 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = '__all__'
 
-class GroupMessageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GroupMessage
-        fields = '__all__'
-
-class CallSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Call
-        fields = '__all__'
-
-class AssignmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Assignment
-        fields = '__all__'
-
-class AssignmentSubmissionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AssignmentSubmission
-        fields = '__all__'
-
-class MaterialSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Material
-        fields = '__all__'
-
-class SubscriptionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subscription
-        fields = '__all__'
-
-class ChessGameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ChessGame
-        fields = '__all__'
-
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = '__all__'
-
-class JobApplicationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JobApplication
-        fields = '__all__'
-
-class LessonBookingSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LessonBooking
-        fields = '__all__'
-        
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     
